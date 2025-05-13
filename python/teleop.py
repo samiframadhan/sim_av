@@ -7,7 +7,7 @@ import websocket
 import time
 
 # WebSocket server URL (adjust IP and port as needed)
-WS_URL = "ws://192.168.74.19:81/"  # replace with your ESP32 IP
+WS_URL = "ws://192.168.57.19:81/"  # replace with your ESP32 IP
 
 # Control variables (0.0 - 100.0)
 steer = 50.0      # center at 50
@@ -34,7 +34,7 @@ def get_key(timeout=0.1):
     return ch
 
 
-def clamp(value, min_v=0.0, max_v=100.0):
+def clamp(value, min_v=-100.0, max_v=100.0):
     return max(min_v, min(max_v, value))
 
 
