@@ -7,12 +7,13 @@ import websocket
 import time
 
 # WebSocket server URL (adjust IP and port as needed)
-WS_URL = "ws://192.168.57.19:81/"  # replace with your ESP32 IP
+WS_URL = "ws://192.168.229.19:81/"  # replace with your ESP32 IP
 
 # Control variables (0.0 - 100.0)
-steer = 50.0      # center at 50
+steer = 60.0      # center at 50
 throttle = 0.0    # start stopped
-STEP = 5.0        # increment step
+STEP = 1.0        # increment step
+STEP_STEER = 20.0        # increment step
 
 # Key mappings
 # 'a' and 'd' for left/right steering
@@ -48,15 +49,21 @@ def main():
         while True:
             key = get_key()
             if key == 'a':
-                steer = clamp(steer - STEP)
+                steer = clamp(steer - STEP_STEER)
             elif key == 'd':
-                steer = clamp(steer + STEP)
+                steer = clamp(steer + STEP_STEER)
             elif key == 'w':
                 throttle = clamp(throttle + STEP)
             elif key == 's':
                 throttle = clamp(throttle - STEP)
             elif key == 'q':
                 break
+            elif key == 'x':
+                # Reset steer
+                steer = 60.0
+            elif key == 'z':
+                # Reset throttle
+                throttle = 0.0
             else:
                 # no change
                 continue
